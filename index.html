@@ -1,171 +1,261 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade with Kuldeep | Air India Student Flight Offers</title>
+    <title>Trade with Kuldeep | Air India Student Offer</title>
     <style>
         :root {
             --primary-red: #e11b22;
-            --dark-bg: #121820;
-            --gold-accent: #d4af37;
-            --light-bg: #f8f9fa;
-            --text-dark: #1f2937;
+            --dark-bg: #0d1117;
+            --gold-accent: #00ff88;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #1f2937;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
+            background-color: #f3f4f6;
+            color: var(--text-color);
+            overflow-x: hidden;
         }
 
-        /* Header / Navbar */
+        /* Navbar Styling */
         header {
-            background-color: var(--dark-bg);
+            background: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(10px);
             color: #fff;
-            padding: 15px 5%;
+            padding: 12px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .brand-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .brand-logo {
-            height: 50px;
-            width: 50px;
+        /* Custom Inbuilt SVG Logo */
+        .logo-svg {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            object-fit: cover;
+            background: linear-gradient(135deg, #0d1117, #1f2937);
             border: 2px solid var(--gold-accent);
+            padding: 4px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
         }
 
         .brand-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #ffffff;
         }
 
-        .brand-title span {
+        .brand-subtitle {
+            font-size: 0.75rem;
             color: var(--gold-accent);
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 400;
+            font-weight: 600;
         }
 
-        /* Hero Banner */
+        .btn-header {
+            background-color: var(--primary-red);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-header:hover {
+            background-color: #b81218;
+            transform: scale(1.05);
+        }
+
+        /* Hero Section with Auto Slider */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('student_offer_banner.png') center/cover no-repeat;
-            min-height: 80vh;
+            position: relative;
+            height: 85vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: #fff;
-            padding: 40px 20px;
+            margin-top: 60px;
+            overflow: hidden;
+        }
+
+        .bg-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+            z-index: 2;
         }
 
         .hero-content {
+            position: relative;
+            z-index: 3;
             max-width: 800px;
+            padding: 20px;
         }
 
         .hero h1 {
             font-size: 2.8rem;
+            font-weight: 800;
             margin-bottom: 15px;
-            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
         }
 
         .hero h1 span {
-            color: var(--gold-accent);
+            color: #ffdd00;
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 25px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
         }
 
-        .btn-primary {
+        .btn-main {
             display: inline-block;
             background-color: var(--primary-red);
             color: #fff;
-            padding: 15px 35px;
+            padding: 16px 36px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 700;
             text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 12px rgba(225, 27, 34, 0.4);
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(225, 27, 34, 0.5);
+            transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
-            background-color: #b81218;
-            transform: translateY(-2px);
+        .btn-main:hover {
+            background-color: #ff1e27;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(225, 27, 34, 0.7);
         }
 
-        /* Highlights Section */
-        .features {
+        /* Feature Cards */
+        .features-container {
             max-width: 1100px;
-            margin: -50px auto 50px;
+            margin: -60px auto 40px;
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            position: relative;
-            z-index: 10;
         }
 
-        .card {
-            background: #fff;
+        .feature-card {
+            background: var(--card-bg);
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             text-align: center;
-            border-top: 4px solid var(--primary-red);
+            border-top: 5px solid var(--primary-red);
+            backdrop-filter: blur(5px);
         }
 
-        .card h3 {
-            font-size: 1.3rem;
+        .feature-card h3 {
+            color: #0d1117;
             margin-bottom: 10px;
-            color: var(--dark-bg);
+            font-size: 1.2rem;
         }
 
-        /* Image Showcase */
-        .showcase {
-            max-width: 1000px;
-            margin: 40px auto;
+        /* Air India Specific Offer Showcase */
+        .offer-showcase {
+            max-width: 900px;
+            margin: 50px auto;
             padding: 0 20px;
             text-align: center;
         }
 
-        .showcase img {
+        .offer-showcase h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .offer-showcase p {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        .banner-wrapper {
+            position: relative;
+            display: inline-block;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .banner-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .banner-wrapper img {
             width: 100%;
-            max-width: 700px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            margin-top: 20px;
+            max-width: 800px;
+            display: block;
         }
 
         /* Footer */
         footer {
             background-color: var(--dark-bg);
-            color: #aaa;
+            color: #9ca3af;
             text-align: center;
-            padding: 25px 20px;
-            margin-top: 60px;
+            padding: 30px 20px;
+            margin-top: 50px;
             font-size: 0.9rem;
         }
 
@@ -173,63 +263,98 @@
             color: var(--gold-accent);
             text-decoration: none;
         }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .brand-subtitle { display: none; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
+    <!-- Header / Navbar -->
     <header>
         <div class="brand-container">
-            <!-- Trade with Kuldeep Logo -->
-            <img src="trade_with_kuldeep_logo.png" alt="Trade with Kuldeep" class="brand-logo">
-            <div class="brand-title">
-                Trade with Kuldeep
-                <span>Partner Air India Special Student Offer</span>
+            <!-- Custom Inbuilt Trading & Flight SVG Logo -->
+            <svg class="logo-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="none" stroke="#00ff88" stroke-width="3"/>
+                <path d="M 20 65 L 40 45 L 60 55 L 80 30" fill="none" stroke="#00ff88" stroke-width="5" stroke-linecap="round"/>
+                <polygon points="80,30 70,32 78,42" fill="#00ff88"/>
+                <path d="M 35 35 L 55 25 L 65 30 L 50 40 L 60 45 L 50 48 L 45 42 Z" fill="#ffffff"/>
+            </svg>
+            <div class="brand-text">
+                <span class="brand-title">Trade with Kuldeep</span>
+                <span class="brand-subtitle">Partner: Air India Student Flight Offer</span>
             </div>
         </div>
-        <div>
-            <a href="https://www.airindia.com/in/en/book/exclusive-deals/student-flight-offer.html?utm_source=google&utm_medium=cpc&utm_campaign=Acquisition_Perform_SEM_IF_India_Sale_Prospecting_Brand_Keywords_Student-Offers_IND-ALL_Nullhaul_NullB_EM_MM&gad_source=1&gad_campaignid=23223494291&gclid=CjwKCAjw_9bWBhBGEiwAomyTIotl1Xiat4EU128xTZMFFbnLfzB-n7wCpibfnkzWTDRoXLl3R6wakhoC4bQQAvD_BwE" target="_blank" class="btn-primary" style="padding: 10px 20px; font-size: 0.9rem;">Book Flight</a>
-        </div>
+        <a href="https://www.airindia.com/in/en/book/exclusive-deals/student-flight-offer.html?utm_source=google&utm_medium=cpc&utm_campaign=Acquisition_Perform_SEM_IF_India_Sale_Prospecting_Brand_Keywords_Student-Offers_IND-ALL_Nullhaul_NullB_EM_MM&gad_source=1&gad_campaignid=23223494291&gclid=CjwKCAjw_9bWBhBGEiwAomyTIotl1Xiat4EU128xTZMFFbnLfzB-n7wCpibfnkzWTDRoXLl3R6wakhoC4bQQAvD_BwE" target="_blank" class="btn-header">Book Flight</a>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Dynamic Background Slider -->
     <section class="hero">
+        <div class="bg-slider">
+            <!-- Auto Slider Images (Student Travel & Flights) -->
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600&auto=format&fit=crop');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=1600&auto=format&fit=crop');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1600&auto=format&fit=crop');"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?q=80&w=1600&auto=format&fit=crop');"></div>
+        </div>
+        <div class="overlay"></div>
+
         <div class="hero-content">
             <h1>Students Get <span>Flat 10% OFF</span> On Flight Bookings</h1>
-            <p>Air India exclusive student discount program. Get special perks, extra baggage allowance, and low convenience fees.</p>
-            <a href="https://www.airindia.com/in/en/book/exclusive-deals/student-flight-offer.html?utm_source=google&utm_medium=cpc&utm_campaign=Acquisition_Perform_SEM_IF_India_Sale_Prospecting_Brand_Keywords_Student-Offers_IND-ALL_Nullhaul_NullB_EM_MM&gad_source=1&gad_campaignid=23223494291&gclid=CjwKCAjw_9bWBhBGEiwAomyTIotl1Xiat4EU128xTZMFFbnLfzB-n7wCpibfnkzWTDRoXLl3R6wakhoC4bQQAvD_BwE" target="_blank" class="btn-primary">Claim Student Offer Now</a>
+            <p>Air India Exclusive Student Offer referred by Kuldeep. Fly to your dream university or home with extra baggage allowance!</p>
+            <a href="https://www.airindia.com/in/en/book/exclusive-deals/student-flight-offer.html?utm_source=google&utm_medium=cpc&utm_campaign=Acquisition_Perform_SEM_IF_India_Sale_Prospecting_Brand_Keywords_Student-Offers_IND-ALL_Nullhaul_NullB_EM_MM&gad_source=1&gad_campaignid=23223494291&gclid=CjwKCAjw_9bWBhBGEiwAomyTIotl1Xiat4EU128xTZMFFbnLfzB-n7wCpibfnkzWTDRoXLl3R6wakhoC4bQQAvD_BwE" target="_blank" class="btn-main">Claim Student Offer Now</a>
         </div>
     </section>
 
-    <!-- Highlights Section -->
-    <section class="features">
-        <div class="card">
-            <h3>Flat 10% Off</h3>
-            <p>Save directly on base fare for domestic & international flight bookings.</p>
+    <!-- Highlights -->
+    <section class="features-container">
+        <div class="feature-card">
+            <h3>🎓 Flat 10% Off</h3>
+            <p>Save directly on base fare for domestic & international flights.</p>
         </div>
-        <div class="card">
-            <h3>Extra Baggage</h3>
-            <p>Carry more with special student baggage allowances on your flights.</p>
+        <div class="feature-card">
+            <h3>🧳 Extra Baggage Allowance</h3>
+            <p>Carry your essential baggage without extra charges.</p>
         </div>
-        <div class="card">
-            <h3>Flexible Date Change</h3>
-            <p>Enjoy 1 free date change option when booking directly with Air India.</p>
+        <div class="feature-card">
+            <h3>🔄 Free Date Change</h3>
+            <p>Get 1 free date change option on direct website bookings.</p>
         </div>
     </section>
 
-    <!-- Offer Image Banner Section -->
-    <section class="showcase">
-        <h2>Exclusive Flight Deals Referred By Kuldeep</h2>
-        <a href="https://www.airindia.com/in/en/book/exclusive-deals/student-flight-offer.html?utm_source=google&utm_medium=cpc&utm_campaign=Acquisition_Perform_SEM_IF_India_Sale_Prospecting_Brand_Keywords_Student-Offers_IND-ALL_Nullhaul_NullB_EM_MM&gad_source=1&gad_campaignid=23223494291&gclid=CjwKCAjw_9bWBhBGEiwAomyTIotl1Xiat4EU128xTZMFFbnLfzB-n7wCpibfnkzWTDRoXLl3R6wakhoC4bQQAvD_BwE" target="_blank">
-            <img src="student_offer_banner.png" alt="Air India Student Offer - Flat 10% Off">
+    <!-- Air India Official Banner Showcase -->
+    <section class="offer-showcase">
+        <h2>Exclusive Partner Discount</h2>
+        <p>Click the banner below to get redirected to Air India's official booking portal.</p>
+        <a href="https://www.airindia.com/in/en/book/exclusive-deals/student-flight-offer.html?utm_source=google&utm_medium=cpc&utm_campaign=Acquisition_Perform_SEM_IF_India_Sale_Prospecting_Brand_Keywords_Student-Offers_IND-ALL_Nullhaul_NullB_EM_MM&gad_source=1&gad_campaignid=23223494291&gclid=CjwKCAjw_9bWBhBGEiwAomyTIotl1Xiat4EU128xTZMFFbnLfzB-n7wCpibfnkzWTDRoXLl3R6wakhoC4bQQAvD_BwE" target="_blank" class="banner-wrapper">
+            <!-- Official Air India Student Offer Graphic -->
+            <img src="https://images.unsplash.com/photo-1540339832862-47459980783b?q=80&w=1200&auto=format&fit=crop" alt="Air India Flight Special Deal">
         </a>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Trade with Kuldeep. All rights reserved.</p>
-        <p>Referred offer links directly to <a href="https://www.airindia.com" target="_blank">Air India Official Website</a>.</p>
+        <p>&copy; 2026 Trade with Kuldeep. All Rights Reserved.</p>
+        <p>Official Partner Link for Air India Flight Bookings. Visit <a href="https://www.airindia.com" target="_blank">AirIndia.com</a></p>
     </footer>
 
+    <!-- Background Slider Script (Switches every 2 Seconds) -->
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // 2000ms = 2 Seconds Interval
+        setInterval(nextSlide, 2000);
+    </script>
 </body>
 </html>
